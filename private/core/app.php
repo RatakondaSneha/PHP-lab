@@ -22,7 +22,7 @@
                         ":host=" . $this->config["database"]["dbhost"] .
                         ";dbname=" . $this->config["database"]["dbname"]
                         , $this->config["database"]["username"]
-                        , $this->config["database"]["passord"]);
+                        , $this->config["database"]["password"]);
                 } catch(PDOException $ex) {
                     echo($ex->getMessage);
                 }
