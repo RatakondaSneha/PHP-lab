@@ -1,7 +1,7 @@
 <?php
 
 class Userinfo extends Controller {
-    function_construct()
+    function _construct()
     {
         parent::_construct();
 
@@ -32,7 +32,7 @@ class Userinfo extends Controller {
             $cookie_csrf = $_COOKIE["csrf"];
             $session_csrf = $_SESSION["csrf"];
 
-            if ($session_cookie == $post_csrf && $session_cookie == $cookie_csrf)
+            if ($session_csrf == $post_csrf && $session_csrf == $cookie_csrf)
             {
                 $this-> model("UsersModel");
                 $clr_username = htmlentities($_POST["username"]);
@@ -63,7 +63,7 @@ class Userinfo extends Controller {
             $_SESSION["csrf"] = $csrf;
             setcookie("csrf",$csrf);
             echo("session cookie::" . $_SESSION["csrf"]);
-            $this->view("test/login" , array("csrf"=> $csrf));
+            $this->view("main/login" , array("csrf"=> $csrf));
 
         }
         else{

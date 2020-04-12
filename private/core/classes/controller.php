@@ -77,7 +77,11 @@ abstract class Controller {
     }
 
     function view ($path, $data = []) {
-
+        
+        if(is_array($data)){
+            extract($data);
+        }
+        echo($path);
         require(ROOT . "/private/app/views/$path.php");
 
     }

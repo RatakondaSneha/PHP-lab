@@ -23,8 +23,8 @@ class Installer
 
               $this->db = new PDO(
                   $dsn,
-                  $this->config["database"]["username"]
-                  $this->config["database"]["password"]
+                  $this->config["database"]["username"];
+                  $this->config["database"]["password"];
               );
 
               $sql = file_get_contents("setup/data/init.sql");

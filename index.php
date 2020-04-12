@@ -1,5 +1,5 @@
 <?php
-
+    ec
     require(__DIR__ . '/private/core/app.php');
 
     $app = new App();
