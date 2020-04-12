@@ -1,4 +1,4 @@
-USE MyDB;
+USE database;
 
 CREATE TABLE authors(
     email VARCHAR(128) NOT NULL PRIMARY KEY,
@@ -11,4 +11,4 @@ CREATE TABLE authors(
 );
 
 
-INSERT INTO authors (email, hash_password, first_name, last_name, biography) VALUES ("ratakondasneha@gmail.com","","Sneha","Ratakonda","Professor");
+INSERT INTO authors (email, hash_password, first_name, last_name, biography) VALUES ("ratakondasneha@gmail.com","$2y$10$5lkf6snGlf.zPytnwYl9YeWW/Kz7nRZn5i3ytDQlltC9xGic9QWCm","Sneha","Ratakonda","Professor");

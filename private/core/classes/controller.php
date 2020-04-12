@@ -64,13 +64,10 @@ abstract class Controller {
     abstract function Index ();
 
     function model ($path) {
-        // $path = $path;
-
         $class = explode('/', $path);
         $class = $class[count($class)-1];
 
         $path = strtolower($path);
-
         require(ROOT . "/private/app/models/$path.php");
 
         $this->$class = new $class;
@@ -81,7 +78,6 @@ abstract class Controller {
         if(is_array($data)){
             extract($data);
         }
-        echo($path);
         require(ROOT . "/private/app/views/$path.php");
 
     }

@@ -7,7 +7,7 @@ form > * {
 
 </style>
 
-<form action = "/user/login" method = "POST">
+<form action = "/userinfo/login" method = "POST">
 <input type = "hidden" name = "csrf" value = "<?php echo($csrf) ?>">
 <label for = "username"> Email </label>
 <input type = "text" id = "username" name = "username" required autocomplete = "Email" > 

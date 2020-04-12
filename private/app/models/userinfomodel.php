@@ -2,7 +2,7 @@
 
 class UserInfoModel extends Model
 {
-    function_construct(){
+    function _construct(){
 
         parent::_construct();
 
@@ -11,7 +11,7 @@ class UserInfoModel extends Model
     function verifiedUser($username,$password)
     
     {
-        $clr_username = $username;
+       $clr_username = $username;
         $clr_password = $password;
         $sql = "SELECT `hash_password`, `first_name`, `last_name` from authors where email = ?";
         $stmt = $this -> db-> prepare($sql);
@@ -23,7 +23,7 @@ class UserInfoModel extends Model
         if(isset($hash_password)){
 
            $is_verified = password_verify($clr_password,$hash_password);
-           if($is_verified)
+            if($is_verified)
            {
                $_SESSION["first_name"] = $row[1];
                $_SESSION["last_name"] = $row[2];
@@ -31,9 +31,11 @@ class UserInfoModel extends Model
                $update_sql = "UPDATE `authors` set `last_login_date` = CURRENT_TIMESTAMP() where email = ?";
                $update_stmt = $this -> db -> prepare($update_sql);
                $update_stmt -> execute(Array($clr_username));
+               return 1;
 
            }
         }
+        return 0;
     }
 
 

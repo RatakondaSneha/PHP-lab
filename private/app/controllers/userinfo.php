@@ -1,86 +1,63 @@
 <?php
 
-class Userinfo extends Controller {
-    function _construct()
-    {
-        parent::_construct();
+class UserInfo extends Controller {
 
+    function __construct() {
+        parent::__construct();
     }
 
     function Index () {
+        $this->view("template/header");
 
-        $this -> view("template/header");
-        $is_verified = isset($_SESSION["username"]);
-        if($is_verified){
-            $this-> view("test/verified");
-
+        $is_authenticated = isset($_SESSION["username"]);
+        if($is_authenticated){
+            $this->view("main/verified");
+        }else{
+            $this->view("main/notverified");
         }
+        
+        $this->view("template/footer");
+    } 
 
-        else{
-            $this -> view("test/notverified");
+    function Login(){
+         if($_SERVER["REQUEST_METHOD"] == "POST"){
+           $post_csrf = htmlentities($_POST["csrf"]);
+           $cookie_csrf = $_COOKIE["csrf"];
+           $sess_cookie = $_SESSION["csrf"];
+           if($sess_cookie == $post_csrf && $sess_cookie == $cookie_csrf){
+            $this->model("UserInfoModel");
+            $clean_username = htmlentities($_POST["username"]);
+        $clean_password = htmlentities($_POST["password"]);
+        $authenticate = $this->UserInfoModel->verifiedUser($clean_username,$clean_password);
+        if($authenticate){
+            header("location: /userinfo/");
+        }else{
+          
+            echo("No authenticated");
         }
-
-        $this -> view("template/footer");
-
+    }else{
+        echo("bad csrf");
     }
-
-    function Login()
-    {
-        if ($_SERVER["REQUEST_METHOD"] == "POST")
-        {
-            $post_csrf = htmlentities($_POST["csrf"]);
-            $cookie_csrf = $_COOKIE["csrf"];
-            $session_csrf = $_SESSION["csrf"];
-
-            if ($session_csrf == $post_csrf && $session_csrf == $cookie_csrf)
-            {
-                $this-> model("UsersModel");
-                $clr_username = htmlentities($_POST["username"]);
-                $clr_password = htmlentities($_POST["password"]);
-                $verified = $this-> UsersModel -> verifiedUser($clr_username,$clr_password);
-                if($verified){
-                    header("location:/user/");
-
-                }
-
-                else{
-
-                    echo("No verified");
-                }
-
-
-            }
-
-            else{
-                echo("bad csrf");
-
-            }
-        }
-
-        else if($_SERVER["REQUEST_METHOD"] == "GET")
-        {
-            $csrf = random_int(10000,100000000);
-            $_SESSION["csrf"] = $csrf;
-            setcookie("csrf",$csrf);
-            echo("session cookie::" . $_SESSION["csrf"]);
-            $this->view("main/login" , array("csrf"=> $csrf));
-
-        }
-        else{
-            http_response_code(405);
-
-        }
-
-
+    }else if($_SERVER["REQUEST_METHOD"] == "GET"){
+       $csrf = random_int(10000,100000000);
+        setcookie("csrf",$csrf);
+        $_SESSION["csrf"] = $csrf;
+        $this->view("main/login" , array("csrf" => $csrf));
+    
+}else{
+        http_response_code(405);
+           
     }
-
-    function Logout()
-    {
-        session_unset();
+        
+    }
+    function Logout(){
+        
         session_destroy();
+        session_unset();
         $_SESSION = Array();
-        header("loation: /user/");
+        $this->view("main/logout");
     }
+
 }
 
 ?>

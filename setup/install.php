@@ -22,9 +22,9 @@ class Installer
               ";dbname=" . $this->config["database"]["dbname"];
 
               $this->db = new PDO(
-                  $dsn,
-                  $this->config["database"]["username"];
-                  $this->config["database"]["password"];
+                  $dsn
+                  ,$this->config["database"]["username"]
+                  ,$this->config["database"]["password"]
               );
 
               $sql = file_get_contents("setup/data/init.sql");
@@ -39,17 +39,11 @@ class Installer
            {
                echo($ex->getMessage());
            }
-
-        
-
-
-
-    }
+}
 }
 
-}
 
-echo("Hello");
+
 $installer = new Installer();
 $installer->configure();
 $installer->install();
