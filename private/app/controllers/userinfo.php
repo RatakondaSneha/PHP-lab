@@ -45,7 +45,7 @@ class UserInfo extends Controller {
         $this->view("main/login" , array("csrf" => $csrf));
     
 }else{
-        http_response_code(405);
+        http_response_code(405); 
            
     }
         
