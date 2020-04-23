@@ -48,7 +48,7 @@ class  Blog extends Controller
         else
         {
             $this -> view("template/header");
-            $this -> view("blog/craete");
+            $this -> view("blog/create");
             $this -> view("template/footer");
 
         }

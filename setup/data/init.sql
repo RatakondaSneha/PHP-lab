@@ -22,7 +22,7 @@ CREATE TABLE posts (
     post_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX (author),
     FOREIGN KEY (author)
-    REFERENCES users (email)
+    REFERENCES authors (email)
 
 );
 
