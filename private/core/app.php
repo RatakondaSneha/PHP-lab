@@ -56,7 +56,7 @@
         function start () {
             session_start();
             $route = explode('/', URI);
-
+            //echo("testing");
             $route[1] = strtolower($route[1]);
 
             if (file_exists(ROOT . "/private/app/controllers/" . $route[1] . ".php")) {

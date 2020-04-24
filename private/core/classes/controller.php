@@ -20,6 +20,7 @@ abstract class Controller {
 
     private function router () {
         
+        //echo("testing");
         if (class_exists($this->route[1])) {
             
             if ($this->args >= 3) {
@@ -76,7 +77,9 @@ abstract class Controller {
     function view ($path, $data = []) {
         
         if(is_array($data))
+        {
             extract($data);
+        }
         
         require(ROOT . "/private/app/views/$path.php");
 
