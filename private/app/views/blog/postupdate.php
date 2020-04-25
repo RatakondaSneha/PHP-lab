@@ -12,7 +12,7 @@ Blog Update
 <input type = "email" id = "author" name = "author" value = "<?php echo $author ?>"/>
 
 <label for = "content" >Content</label>
-<input type = "content" id = "content"><?php echo $content?> </textarea>
+<textarea id="content" name="content"><?php echo($content); ?> </textarea>
 
 <input type = "submit" value = "submit">
 </form>
